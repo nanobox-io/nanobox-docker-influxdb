@@ -7,9 +7,14 @@ RUN mkdir -p \
   /opt/nanobox/hooks
 
 # Install influxdb
-RUN wget -O /tmp/influxdb_1.1.1_amd64.deb https://dl.influxdata.com/influxdb/releases/influxdb_1.1.1_amd64.deb && \
-    dpkg -i /tmp/influxdb_1.1.1_amd64.deb && \
-    rm /tmp/influxdb_1.1.1_amd64.deb
+RUN wget -O /tmp/influxdb.deb https://dl.influxdata.com/influxdb/releases/influxdb_1.2.4_amd64.deb && \
+    dpkg -i /tmp/influxdb.deb && \
+    rm /tmp/influxdb.deb
+
+# Install kapacitor
+RUN wget -O /tmp/kapacitor.deb https://dl.influxdata.com/kapacitor/releases/kapacitor_1.3.0_amd64.deb && \
+    dpkg -i /tmp/kapacitor.deb && \
+    rm /tmp/kapacitor.deb
 
 # Install rsync
 RUN apt-get update -qq && \
