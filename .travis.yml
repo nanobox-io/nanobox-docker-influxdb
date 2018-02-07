@@ -1,7 +1,8 @@
 sudo: required
 
 env:
-  - VERSION=1.0
+  - VERSION=1.2
+  - VERSION=1.4
 
 services:
   - docker
@@ -21,12 +22,12 @@ after_success:
   - docker tag ${NAMESPACE}/influxdb ${NAMESPACE}/influxdb:${VERSION}-beta;
   - docker push ${REMOTE}${NAMESPACE}/influxdb:${VERSION}-beta;
   # `beta` tag is always pushed (master or any dev branch)
-  - if [ "$VERSION" == "1.0" ]; then
+  - if [ "$VERSION" == "1.4" ]; then
     docker tag ${NAMESPACE}/influxdb ${NAMESPACE}/influxdb:beta;
     docker push ${REMOTE}${NAMESPACE}/influxdb:beta;
     fi
   # `latest` tag is only pushed on master && most recent version
-  - if [ "$BRANCH" == "master" ] && [ "$VERSION" == "1.0" ]; then
+  - if [ "$BRANCH" == "master" ] && [ "$VERSION" == "1.4" ]; then
     docker push ${REMOTE}${NAMESPACE}/influxdb;
     fi
   # `$VERSION` (latest/stable implied) tag is only pushed on master. tag branch for clarity otherwise (`$VERSION-$BRANCH`)
